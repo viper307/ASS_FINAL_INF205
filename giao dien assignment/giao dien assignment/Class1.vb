@@ -1,0 +1,27 @@
+﻿Imports System.Data.SqlClient
+Imports System.Data
+
+Public Class Class1
+    Public Function Loadkhachang() As DataSet
+        Dim chuoiketnoi As String = "workstation id=Managerps02860.mssql.somee.com;packet size=4096;user id=ASS_HUYNHLPS02860;pwd=tamhuynh995;data source=Managerps02860.mssql.somee.com;persist security info=False;initial catalog=Managerps02860"
+        Dim conn As SqlConnection = New SqlConnection(chuoiketnoi)
+        Dim LoadKH As New SqlDataAdapter("select ID as 'Mã KH' ,FULL_NAME as 'Tên Khách Hàng', EMAIL as 'EMAIL' from CLIENT", conn)
+        Dim db As New DataSet
+        conn.Open()
+        LoadKH.Fill(db)
+        conn.Close()
+        Return db
+    End Function
+    Public Function Loadsanpham() As DataSet
+        Dim chuoiketnoi As String = "workstation id=Managerps02860.mssql.somee.com;packet size=4096;user id=ASS_HUYNHLPS02860;pwd=tamhuynh995;data source=Managerps02860.mssql.somee.com;persist security info=False;initial catalog=Managerps02860"
+
+        Dim conn As SqlConnection = New SqlConnection(chuoiketnoi)
+        Dim LoadSP As New SqlDataAdapter("select PRODUCT.ID as 'Mã sản phẩm',PRODUCT.NAME as 'Tên sản phẩm', PRODUCT_CATEGORY.ID as 'Mã Loại', PRODUCT_CATEGORY.NAME as 'Tên Loại',PRODUCT.PRICE as 'GIÁ',PRODUCT.DECRIPSION as 'MÔ TẢ SẢN PHẨM' from PRODUCT inner join PRODUCT_CATEGORY on PRODUCT.ID = PRODUCT_CATEGORY.PRODUCT_ID", conn)
+        Dim db As New DataSet
+        conn.Open()
+        LoadSP.Fill(db)
+        conn.Close()
+        Return db
+    End Function
+End Class
+
